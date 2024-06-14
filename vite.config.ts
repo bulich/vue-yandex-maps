@@ -13,7 +13,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@ark-ui': fileURLToPath(new URL('./node_modules/ark-component-ui', import.meta.url)),
     }
   }
 })

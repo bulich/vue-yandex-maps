@@ -1,7 +1,8 @@
+@import '@ark-ui/dist/ark-ui.css';
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;

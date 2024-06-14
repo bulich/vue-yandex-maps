@@ -1,9 +1,16 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
+<script lang="tsx">
+import { defineComponent, Suspense } from 'vue'
+import { YMWidget } from '@/modules/yandex-maps';
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+export default defineComponent({
+  setup() {
+    return () => (
+      <div>
+        <Suspense>
+          <YMWidget />
+        </Suspense>
+      </div>
+    )
+  },
+})
+</script>
