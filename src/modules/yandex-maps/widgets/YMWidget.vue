@@ -15,7 +15,7 @@ export default defineComponent({
       getCoordinates,
       placeMark,
       clearMap,
-      buildRoute,
+      buildClosedRoute,
     } = useYandexMaps('map')
 
     const searchAddressCoordinates = async (address: string) => {
@@ -40,7 +40,7 @@ export default defineComponent({
 
     const buildRouteonMap = () => {
       clearMap()
-      buildRoute(routePoints.value, routingMode.value)
+      buildClosedRoute(routePoints.value, routingMode.value)
     }
 
     onMounted(async () => {
@@ -104,7 +104,7 @@ export default defineComponent({
             <DefaultButton
               label='Построить маршрут'
               onClick={buildRouteonMap}
-              isDisabled={routePoints.value.length === 0}
+              isDisabled={routePoints.value.length < 2}
               size='S'
             />
           </div>

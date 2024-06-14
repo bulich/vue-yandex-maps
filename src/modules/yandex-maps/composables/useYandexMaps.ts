@@ -35,17 +35,34 @@ export const useYandexMaps = (mapContainerId: string) => {
     map.geoObjects.removeAll()
   }
 
-  const buildRoute = (points: number[][], mode: "auto" | "pedestrian") => {
+  const buildRoute = (
+    points: number[][],
+    mode: "auto" | "pedestrian",
+    color: string = '#0034c3',
+    isMarksHidden: boolean = false,
+  ) => {
     if (!map) return
 
     const route = new ymaps.multiRouter.MultiRoute({
       referencePoints: points,
-      params: { routingMode: mode },
+      params: { routingMode: mode, results:1 },
     }, {
+      routeActiveStrokeColor: color,
       boundsAutoApply: true,
+      ...(isMarksHidden ? {
+        wayPointStartIconLayout: "default#none",
+        wayPointFinishIconLayout: "default#none",
+      } : {}),
     })
 
     map.geoObjects.add(route)
+  }
+
+  const buildClosedRoute = (points: number[][], mode: "auto" | "pedestrian") => {
+    buildRoute(points, mode, '#0034c3')
+    if (points.length > 2) {
+      buildRoute([points[points.length - 1], points[0]], mode, '#00ff21', true)
+    }
   }
 
   return {
@@ -54,6 +71,7 @@ export const useYandexMaps = (mapContainerId: string) => {
     placeMark,
     clearMap,
     buildRoute,
+    buildClosedRoute,
   }
 }
 
